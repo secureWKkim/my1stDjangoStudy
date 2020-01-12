@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}"
+</head>
+<body>
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <!-- url 템플릿 태그는 url 이름을 필수 인자로 전달 받는다.
+        여기선 detail 이란 이름을 가진 url 형식을 찾아 url 을 만들어 출력한다.
+        해당 이름을 가진 url 은 urls.py 전체를 검색해 찾는다.-->
+        <li><a href="{% url 'polls:detail' question.id %">{{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
+</html>
